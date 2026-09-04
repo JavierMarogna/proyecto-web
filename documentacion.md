@@ -20,11 +20,11 @@ Entidad principal: ____________
 | archivo                | para qué sirve |
 |------------------------|----------------|
 | index.php / login.php  | Pagina de inicio de sesion|
-| header.php / footer.php| Documentos con la cabecera y pie de pagina |
-| logout.php             | Documento para cerrar la sesion |
-| home.php               | Pagina principal |
-| style.css              | Documento con los estilos de las paginas |
-| tabla.sql              | Base con datos para la pagina |
+| header.php / footer.php| Documentos con la cabecera y pie de pagina|
+| logout.php             | Documento para cerrar la sesion|
+| home.php               | Pagina principal|
+| style.css              | Documento con los estilos de las paginas|
+| tabla.sql              | Base con datos para la pagina|
 
 ## 4. Mapa del flujo
 login -> sesion -> pagina protegida -> include cabecera ->
@@ -36,7 +36,7 @@ cartelera (foreach sobre datos.php) -> click -> ficha (lookup) ejemplo
 - [-] Cartelera (foreach)
 - [-] Ficha (lookup)
 - [+] Tabla MySQL (CREATE + INSERT + SELECT)
-- [-] Repositorio actualizado
+- [+] Repositorio actualizado
 
 ## 6. Proximas etapas
 - [-] Segunda entidad y su relacion (claves foraneas + diagrama ER)
