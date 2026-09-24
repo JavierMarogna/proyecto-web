@@ -24,7 +24,8 @@ Entidad principal: ____________
 | logout.php             | Documento para cerrar la sesion|
 | home.php               | Pagina principal|
 | style.css              | Documento con los estilos de las paginas|
-| tabla.sql              | Base con datos para la pagina|
+| base.sql               | Base con datos para la pagina|
+| base_excel.xlsx        | La base escrita en excel|
 
 ## 4. Mapa del flujo
 login -> sesion -> pagina protegida -> include cabecera ->
@@ -33,7 +34,7 @@ cartelera (foreach sobre datos.php) -> click -> ficha (lookup) ejemplo
 ## 5. Estado actual
 - [+] Login + sesion + proteccion
 - [+] Includes + navegacion
-- [-] Cartelera (foreach)
+- [+] Cartelera (foreach)
 - [-] Ficha (lookup)
 - [+] Tabla MySQL (CREATE + INSERT + SELECT)
 - [+] Repositorio actualizado
