@@ -26,4 +26,15 @@ if ($_SESSION["nombre"]==null && $_SESSION["apellido"]==null){
 <a href="logout.php">salir</a>
 <?php include'includes/footer.php'?>
 <!-- <?php include'proyecto/index.html'?> -->
+
+
+<?php require 'conexion.php'; ?>
+<?php
+$resultado = mysqli_query($conexion, 'SELECT * FROM juegos');
+while ($fila = mysqli_fetch_assoc($resultado)) {
+    echo $fila['nombre'];
+?>
+<img src=" <?php echo $fila['portada']; } ?> " alt="a" style="width: 100px;">
+
+
 </html>
