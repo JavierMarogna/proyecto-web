@@ -6,7 +6,7 @@ if ($_SESSION["nombre"]==null && $_SESSION["apellido"]==null){
 }
 ?>
 
-<!-- Idea de pagina: pagina para subir y jugar juegos -->
+<!-- Idea de pagina: -->
 
 <!DOCTYPE html>
 <html lang="es">

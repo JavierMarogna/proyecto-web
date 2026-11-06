@@ -1,12 +1,9 @@
 <?php
-  $peliculas = require 'datos.php';
+$resultado = mysqli_query($conexion, 'SELECT * FROM juegos');
+while ($fila = mysqli_fetch_assoc($resultado)) {
 ?>
-
-<?php foreach ($peliculas as $id => $peli): ?>
-    <article class="pelicula">
-        <img src="<?= $peli['imagen'] ?>" alt="<?= $peli['titulo'] ?>">
-        <h3><?= $peli['titulo'] ?></h3>
-        <p><?= $peli['anio'] ?></p>
-        <a href="pelicula.php?id=<?= $id ?>">Ver ficha</a>
-    </article>
-<?php endforeach; ?>
+  <article>
+    <h2><?php echo $fila['nombre']; ?></h2>
+    <p><?php echo $fila['descripcion']; ?></p>
+  </article>
+<?php } ?>
