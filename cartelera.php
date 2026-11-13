@@ -1,3 +1,4 @@
+<?php require 'conexion.php'; ?>
 <?php
 $resultado = mysqli_query($conexion, 'SELECT * FROM juegos');
 while ($fila = mysqli_fetch_assoc($resultado)) {

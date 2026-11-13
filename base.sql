@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-09-2026 a las 19:51:48
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 06-11-2026 a las 20:29:47
+-- Versión del servidor: 10.11.16-MariaDB
+-- Versión de PHP: 8.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,10 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `calificaciones` (
   `id` int(11) NOT NULL,
-  `calificacion` varchar(300) NOT NULL,
+  `opinion` varchar(300) DEFAULT NULL,
+  `calificacion` int(1) NOT NULL,
   `jugador_id` int(11) NOT NULL,
   `juego_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `calificaciones`
+--
+
+INSERT INTO `calificaciones` (`id`, `opinion`, `calificacion`, `jugador_id`, `juego_id`) VALUES
+(2, 'fish', 80, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -42,9 +50,17 @@ CREATE TABLE `calificaciones` (
 
 CREATE TABLE `creadores` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
   `foto` varchar(400) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `creadores`
+--
+
+INSERT INTO `creadores` (`id`, `nombre`, `foto`) VALUES
+(1, '*pone un nombre de ejemplo*', ''),
+(2, 'ralsi', '');
 
 -- --------------------------------------------------------
 
@@ -54,8 +70,18 @@ CREATE TABLE `creadores` (
 
 CREATE TABLE `generos` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `generos`
+--
+
+INSERT INTO `generos` (`id`, `nombre`) VALUES
+(1, 'Plataformas'),
+(2, 'Educativo'),
+(3, 'Puzzles'),
+(4, 'Roguelike');
 
 -- --------------------------------------------------------
 
@@ -67,11 +93,19 @@ CREATE TABLE `juegos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `portada` varchar(400) DEFAULT NULL,
-  `archivo` varchar(400) NOT NULL,
-  `descripcion` varchar(300) DEFAULT NULL,
-  `genero_id` int(11) DEFAULT NULL,
+  `ruta` varchar(400) NOT NULL,
+  `descripcion` varchar(400) DEFAULT NULL,
+  `genero1_id` int(11) NOT NULL,
+  `genero2_id` int(11) DEFAULT NULL,
   `creador_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `juegos`
+--
+
+INSERT INTO `juegos` (`id`, `nombre`, `portada`, `ruta`, `descripcion`, `genero1_id`, `genero2_id`, `creador_id`) VALUES
+(3, 'Tic pixel dungeon', 'a', 'a', 'Flechas = moverse - atacar', 4, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -81,9 +115,20 @@ CREATE TABLE `juegos` (
 
 CREATE TABLE `jugadores` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
   `foto` varchar(400) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `jugadores`
+--
+
+INSERT INTO `jugadores` (`id`, `nombre`, `foto`) VALUES
+(1, 'vijuan', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpp2mL5VKedNC1sm7Sy-a1YKmQrlvR0oqlfUAggUWKBA&s=10'),
+(2, 'DonBromitas123', ''),
+(3, 'egjerkgjag-av.,zk<<gkr.-lwwle,vel,lsgge+´+´4309', ''),
+(4, 'The original       starwalker', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrNPpnKbkRDqhhjNeJdREYM055w7zisMI-QAwe47me3Q&s=10'),
+(5, 'fish', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj1oSBicaYfdzfJt597zbcunlaGEwUWgx_m-lsIzsdBQ&s=10');
 
 --
 -- Índices para tablas volcadas
@@ -114,7 +159,8 @@ ALTER TABLE `generos`
 --
 ALTER TABLE `juegos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `genero_id` (`genero_id`),
+  ADD KEY `genero1_id` (`genero1_id`),
+  ADD KEY `genero2_id` (`genero2_id`),
   ADD KEY `creador_id` (`creador_id`);
 
 --
@@ -131,31 +177,31 @@ ALTER TABLE `jugadores`
 -- AUTO_INCREMENT de la tabla `calificaciones`
 --
 ALTER TABLE `calificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `creadores`
 --
 ALTER TABLE `creadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `generos`
 --
 ALTER TABLE `generos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
@@ -172,8 +218,9 @@ ALTER TABLE `calificaciones`
 -- Filtros para la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  ADD CONSTRAINT `juegos_ibfk_1` FOREIGN KEY (`genero_id`) REFERENCES `generos` (`id`),
-  ADD CONSTRAINT `juegos_ibfk_2` FOREIGN KEY (`creador_id`) REFERENCES `creadores` (`id`);
+  ADD CONSTRAINT `juegos_ibfk_1` FOREIGN KEY (`genero1_id`) REFERENCES `generos` (`id`),
+  ADD CONSTRAINT `juegos_ibfk_2` FOREIGN KEY (`genero2_id`) REFERENCES `generos` (`id`),
+  ADD CONSTRAINT `juegos_ibfk_3` FOREIGN KEY (`creador_id`) REFERENCES `creadores` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
